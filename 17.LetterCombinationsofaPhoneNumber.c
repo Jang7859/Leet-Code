@@ -1,7 +1,7 @@
 char arr[4];
 
-void solve(char ***ans, char* digits, char *phone[], int len, int temp, int *returnSize){
-    if(len==temp){
+void solve(char ***ans, char* digits, char *phone[], int len, int depth, int *returnSize){
+    if(len==depth){
         (*returnSize)++;
         *ans = (char**)realloc(*ans, sizeof(char*)*(*returnSize));
         (*ans)[*returnSize-1] = (char*)malloc(sizeof(char)*(len+1));
@@ -13,16 +13,16 @@ void solve(char ***ans, char* digits, char *phone[], int len, int temp, int *ret
         return;
     }
     
-    int num = digits[temp] - '0';
+    int num = digits[depth] - '0';
     if(num==7 || num==9){
         for(int i=0;i<4;i++){
-            arr[temp] = phone[num][i];
-            solve(ans, digits, phone, len, temp+1, returnSize);
+            arr[depth] = phone[num][i];
+            solve(ans, digits, phone, len, depth+1, returnSize);
         }
     }else{
         for(int i=0;i<3;i++){
-            arr[temp] = phone[num][i];
-            solve(ans, digits, phone, len, temp+1, returnSize);
+            arr[depth] = phone[num][i];
+            solve(ans, digits, phone, len, depth+1, returnSize);
         }
     }
 }
@@ -33,7 +33,7 @@ char ** letterCombinations(char * digits, int* returnSize){
     int len = strlen(digits);
     *returnSize = 0;
     if(len==0) return ans;
-    char *phone[] = {"","","abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz", ""};
+    char *phone[] = {"","","abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     
     solve(&ans, digits, phone, len, 0, returnSize);
     
