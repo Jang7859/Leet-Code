@@ -1,61 +1,41 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+char arr[4];
 
-#define char_to_int(c) ((c) - '0')
-
-#define MAX(a, b) ((a) > (b)? (a) : (b))
-
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
-char ** letterCombinations(char * digits, int* returnSize)
-{
-    char *pad[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-    int nextSize;
-    
-    if (digits[0] == '\0') {
-        *returnSize = 0;
-        return NULL;
-    }
-
-    char c = digits[0];
-    int d = char_to_int(c);
-    char **next = letterCombinations(digits + 1, &nextSize);
-    int i, j, len_digits = strlen(pad[d]);
-    char **res;
-    res = malloc(sizeof(char *) * len_digits * MAX(1, nextSize));
-    *returnSize = 0;
-  
-    for (i = 0; i < len_digits; i++) {
-        c = pad[d][i];
-        if (nextSize == 0) {
-            int len = 1 + 1;
-            char *s = malloc(len);
-            sprintf(s, "%c", c);
-            res[*returnSize] = s;
-            (*returnSize)++;
+void solve(char ***ans, char* digits, char *phone[], int len, int temp, int *returnSize){
+    if(len==temp){
+        (*returnSize)++;
+        *ans = (char**)realloc(*ans, sizeof(char*)*(*returnSize));
+        (*ans)[*returnSize-1] = (char*)malloc(sizeof(char)*(len+1));
+        (*ans)[*returnSize-1][len] = NULL;
+        for(int i=0;i<len;i++){
+            (*ans)[*returnSize-1][i] = arr[i];
         }
-        for (j = 0; j < nextSize; j++) {
-            int len = strlen(next[j]) + 1 + 1;
-            char *s = malloc(len);
-            sprintf(s, "%c%s", c, next[j]);
-            res[*returnSize] = s;
-            (*returnSize)++;
-        }
+        
+        return;
     }
     
-    return res;
+    int num = digits[temp] - '0';
+    if(num==7 || num==9){
+        for(int i=0;i<4;i++){
+            arr[temp] = phone[num][i];
+            solve(ans, digits, phone, len, temp+1, returnSize);
+        }
+    }else{
+        for(int i=0;i<3;i++){
+            arr[temp] = phone[num][i];
+            solve(ans, digits, phone, len, temp+1, returnSize);
+        }
+    }
 }
 
-int main(void){
-
-    char *digits = "23";
-    int size, i;
-    char **result = letterCombinations(digits,&size);
-    for(i=0;i<size;i++){
-        printf("%s, ", result[i]);
-    }
-
-    return 0;
+char ** letterCombinations(char * digits, int* returnSize){
+    char **ans = (char**)malloc(sizeof(char*));
+    ans[0] = NULL;
+    int len = strlen(digits);
+    *returnSize = 0;
+    if(len==0) return ans;
+    char *phone[] = {"","","abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz", ""};
+    
+    solve(&ans, digits, phone, len, 0, returnSize);
+    
+    return ans;
 }
