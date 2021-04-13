@@ -5,7 +5,7 @@ int* constructArray(int n, int k, int* returnSize){
     int *ans = (int*)malloc(sizeof(int)*n);
     int i=0;
     *returnSize=n;
-    ans[i] = 1;
+    ans[0] = 1;
     
     while(k){
         
