@@ -11,8 +11,7 @@ int* constructArray(int n, int k, int* returnSize){
     while(k){
         
         if(!(i%2)) ans[i+1] = ans[i]+k;
-        
-        if(i%2) ans[i+1] = ans[i]-k;
+        else ans[i+1] = ans[i]-k;
         
         i++;
         k--;
