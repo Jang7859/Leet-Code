@@ -7,6 +7,7 @@ int* constructArray(int n, int k, int* returnSize){
     *returnSize=n;
     ans[0] = 1;
     
+    //Part 1
     while(k){
         
         if(!(i%2)) ans[i+1] = ans[i]+k;
@@ -18,6 +19,7 @@ int* constructArray(int n, int k, int* returnSize){
         
     }
     
+    //Part 2
     for(int j=i+1;j<n;j++){
         ans[j] = j+1;
     }       
