@@ -1,6 +1,13 @@
+// Three solusions.
+//1. Using dp and binary search. (O(n log(n)))
+//2. Using dp (O(n^2))
+//3. Using dp (O(n^3))
+
+
+
 //O(n log(n))
 
-int findIndex(int dp[], int l, int r, int target){
+int findIndex(int dp[], int l, int r, int target){ 
     if(l<=r){
         int mid = l+(r-l)/2;
         if(dp[mid]==target) return mid;
@@ -11,14 +18,14 @@ int findIndex(int dp[], int l, int r, int target){
     return l;
 }
 
-int lengthOfLIS(int* nums, int numsSize){
+int lengthOfLIS(int* nums, int numsSize){ 
     int dp[numsSize];
     int k=-1;
-    for(int i=0;i<numsSize;i++){
+    for(int i=0;i<numsSize;i++){ //O(n)
         if(i==0 || dp[k]<nums[i]){
             dp[++k] = nums[i];
         }else{
-            int idx = findIndex(dp, 0, k, nums[i]);
+            int idx = findIndex(dp, 0, k, nums[i]);//O(log(n))
             dp[idx] = nums[i];
         }
     }
