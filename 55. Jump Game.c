@@ -26,7 +26,7 @@ bool canJump(int* nums, int numsSize){
 }
 */
 
-//DP (Bottom-Up)  O(2^n)
+//DP (Bottom-Up)  O(n^2)
 /*
 bool canJump(int* nums, int numsSize){
     bool dp[numsSize];
@@ -45,7 +45,7 @@ bool canJump(int* nums, int numsSize){
     return dp[numsSize-1];
 }
 */
-//DP (Top-Down)   O(2^n)
+//DP (Top-Down)   O(n^2)
 /*
 bool canJump(int* nums, int numsSize){
     bool dp[numsSize];
