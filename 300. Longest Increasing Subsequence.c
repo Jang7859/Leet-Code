@@ -1,7 +1,7 @@
 // Three solusions.
 //1. Using dp and binary search. (O(n log(n)))
 //2. Using dp (O(n^2))
-//3. Using dp (O(n^3))
+//3. Using Brute Force : O(n^3). (O(n^3))
 
 
 
@@ -63,7 +63,7 @@ int lengthOfLIS(int* nums, int numsSize){
 }
 */
 
-//DP, time complex : O(n^3).
+//Brute Force : O(n^3).
 /*
 int lengthOfLIS(int* nums, int numsSize){
     int max=1;
