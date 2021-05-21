@@ -15,11 +15,10 @@
  */
 int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes){
     int **ans = NULL;
-    *returnSize = 0;
     *returnColumnSizes = NULL;
     int temp = 0, temp2 = 1;
+    *returnSize = 0;
     if(root==NULL) return NULL;
-    
     struct TreeNode *queue[10000];
     int front = -1, tail = -1;
     queue[++tail] = root;
@@ -48,3 +47,37 @@ int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes
     return ans;
     
 }
+
+//0ms, 100% time.
+// int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes){
+//     int **ans = (int*)malloc(sizeof(int*)*1000);
+//     (*returnColumnSizes) = (int*)malloc(sizeof(int)*1000);
+//     int temp = 0, temp2 = 1;
+//     *returnSize = 0;
+//     if(root==NULL) return NULL;
+//     struct TreeNode *queue[10000];
+//     int front = -1, tail = -1;
+//     queue[++tail] = root;
+    
+//     while(front!=tail){
+//         (*returnColumnSizes)[*returnSize] = tail - front;
+//         ans[*returnSize] = (int*)malloc(sizeof(int)*(tail - front));
+//         for(int i = front+1;i<=tail;i++){
+//             ans[*returnSize][i-(front+1)] = queue[i]->val;
+//         }
+//         (*returnSize)++;
+        
+//         int index = tail;
+//         while((temp2--)!=0){
+//             front++;
+//             if(queue[front]->left !=NULL){ queue[++tail] = queue[front]->left; temp++;}
+//             if(queue[front]->right !=NULL) {queue[++tail] = queue[front]->right; temp++;}
+//         }
+//         temp2 = temp;
+//         temp = 0;
+        
+//     }
+    
+//     return ans;
+    
+// }
